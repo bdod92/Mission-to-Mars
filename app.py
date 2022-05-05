@@ -21,6 +21,7 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
    mars = mongo.db.mars.find_one()
+   print("we made it to index")
    return render_template("index.html", mars=mars)
 
 # "button" that runs the scraper once it's "clicked"
@@ -33,6 +34,7 @@ def scrape():
    #upsert = true creates a new document if one doesn't already exist
    mars.update_one({}, {"$set":mars_data}, upsert=True)
    #navigates back to / where we can see updated content
+   print("we made it to scrape")
    return redirect('/', code=302)
 
 #tell the app to run
